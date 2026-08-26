@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Northstar Decision Lab — evidence-led portfolio intelligence for complex programs.">
+  <title>Northstar Decision Lab</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to dashboard</a>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Primary navigation">
+      <a class="brand" href="#overview" aria-label="Northstar home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 40 40" role="img"><path d="M20 2l4.2 13.8L38 20l-13.8 4.2L20 38l-4.2-13.8L2 20l13.8-4.2L20 2z"/><circle cx="20" cy="20" r="4"/></svg>
+        </span>
+        <span><strong>Northstar</strong><small>Decision Lab</small></span>
+      </a>
+      <nav>
+        <a class="nav-link active" href="#overview"><span aria-hidden="true">⌂</span> Overview</a>
+        <a class="nav-link" href="#portfolio"><span aria-hidden="true">◇</span> Portfolio</a>
+        <a class="nav-link" href="#risk"><span aria-hidden="true">△</span> Risk intelligence</a>
+        <a class="nav-link" href="#scenarios"><span aria-hidden="true">◫</span> Scenario lab</a>
+        <a class="nav-link" href="#decisions"><span aria-hidden="true">✓</span> Decisions</a>
+      </nav>
+      <div class="sidebar-foot">
+        <span class="system-dot" aria-hidden="true"></span>
+        <div><strong>Analysis complete</strong><small id="last-updated">Offline demo</small></div>
+      </div>
+    </aside>
+
+    <main id="main-content">
+      <header class="topbar">
+        <button class="menu-button" id="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+        <div>
+          <p class="eyebrow">EXECUTIVE CONTROL PLANE</p>
+          <h1>Portfolio command center</h1>
+        </div>
+        <div class="topbar-actions">
+          <span class="data-pill"><span class="pulse"></span><span id="data-source">Connecting…</span></span>
+          <button class="icon-button" id="refresh-button" aria-label="Refresh analysis" title="Refresh analysis">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 10-2.3 5.7M20 4v7h-7"/></svg>
+          </button>
+          <div class="avatar" aria-label="Executive program lead">NS</div>
+        </div>
+      </header>
+
+      <div class="content" id="overview">
+        <section class="hero panel" aria-labelledby="hero-title">
+          <div>
+            <p class="eyebrow accent">PROGRAM HEALTH · Q3 PLANNING</p>
+            <h2 id="hero-title">Decisions that keep strategy and execution aligned.</h2>
+            <p id="hero-summary">Northstar has analyzed the portfolio, mapped critical dependencies, and identified the highest-leverage intervention.</p>
+            <div class="hero-actions">
+              <a class="button primary" href="#decisions">Review recommendation <span aria-hidden="true">→</span></a>
+              <button class="button ghost" id="run-analysis">Run fresh analysis</button>
+            </div>
+          </div>
+          <div class="confidence" aria-label="Portfolio confidence">
+            <svg viewBox="0 0 120 120" role="img" aria-label="Portfolio confidence score">
+              <circle class="gauge-track" cx="60" cy="60" r="48"/>
+              <circle class="gauge-value" id="confidence-ring" cx="60" cy="60" r="48"/>
+            </svg>
+            <div><strong id="confidence-value">84%</strong><span>Decision confidence</span></div>
+          </div>
+        </section>
+
+        <section class="kpi-grid" aria-label="Executive metrics">
+          <article class="kpi-card"><div class="kpi-icon blue">↗</div><div><span>Strategic alignment</span><strong id="kpi-alignment">—</strong><small id="kpi-alignment-note">Across active initiatives</small></div></article>
+          <article class="kpi-card"><div class="kpi-icon amber">!</div><div><span>Critical risks</span><strong id="kpi-risks">—</strong><small id="kpi-risks-note">Require executive action</small></div></article>
+          <article class="kpi-card"><div class="kpi-icon mint">$</div><div><span>Modeled cost delta</span><strong id="kpi-value">—</strong><small id="kpi-value-note">Illustrative recommendation mix</small></div></article>
+          <article class="kpi-card"><div class="kpi-icon violet">◎</div><div><span>Capacity pressure</span><strong id="kpi-capacity">—</strong><small id="kpi-capacity-note">Platform team utilization</small></div></article>
+        </section>
+
+        <section class="dashboard-grid" id="risk">
+          <article class="panel risk-panel">
+            <div class="panel-heading"><div><p class="eyebrow">RISK INTELLIGENCE</p><h3>Exposure by domain</h3></div><span class="legend"><i></i> Weighted impact</span></div>
+            <div class="bar-chart" id="risk-bars" role="img" aria-label="Horizontal bar chart showing risk exposure by domain"></div>
+            <div class="chart-axis" aria-hidden="true"><span>Low</span><span>Moderate</span><span>High</span><span>Critical</span></div>
+          </article>
+
+          <article class="panel heatmap-panel">
+            <div class="panel-heading"><div><p class="eyebrow">LIKELIHOOD × IMPACT</p><h3>Risk heatmap</h3></div><span class="count-badge" id="risk-count">0 risks</span></div>
+            <div class="heatmap-wrap">
+              <span class="axis-y">IMPACT →</span>
+              <div class="heatmap" id="risk-heatmap" role="img" aria-label="Risk likelihood and impact heatmap"></div>
+              <span class="axis-x">LIKELIHOOD →</span>
+            </div>
+            <div class="risk-key" id="risk-key"></div>
+          </article>
+        </section>
+
+        <section class="dashboard-grid" id="portfolio">
+          <article class="panel investment-panel">
+            <div class="panel-heading"><div><p class="eyebrow">PORTFOLIO ECONOMICS</p><h3>Investment vs. strategic value</h3></div><button class="text-button" type="button">Q3 forecast</button></div>
+            <div class="investment-chart" id="investment-chart" role="img" aria-label="Investment and strategic value chart"></div>
+            <div class="chart-legend"><span><i class="legend-investment"></i>Investment ($M)</span><span><i class="legend-value"></i>Strategic value</span></div>
+          </article>
+
+          <article class="panel graph-panel">
+            <div class="panel-heading"><div><p class="eyebrow">CRITICAL PATH</p><h3>Cross-team dependencies</h3></div><span class="status-tag warning">2 constraints</span></div>
+            <svg id="dependency-graph" class="dependency-graph" viewBox="0 0 560 250" role="img" aria-label="System dependency graph"></svg>
+            <div class="graph-insight"><span aria-hidden="true">⚡</span><p><strong>Platform API is the constraint.</strong> A four-week slip propagates to two launches and increases compliance review scope.</p></div>
+          </article>
+        </section>
+
+        <section class="panel scenario-panel" id="scenarios">
+          <div class="panel-heading"><div><p class="eyebrow">PROGRAM PRE-MORTEM</p><h3>Scenario lab</h3><p>Stress-test the plan before reality does.</p></div><span class="status-tag">Interactive</span></div>
+          <div class="scenario-layout">
+            <form id="scenario-form" class="scenario-controls">
+              <label for="scenario-select">Disruption</label>
+              <select id="scenario-select">
+                <option value="capacity">Lose two platform engineers</option>
+                <option value="delay">Platform API slips four weeks</option>
+                <option value="priority">New executive priority introduced</option>
+                <option value="vendor">Vendor integration becomes unavailable</option>
+              </select>
+              <label for="severity-range">Severity <output id="severity-output">65%</output></label>
+              <input id="severity-range" type="range" min="10" max="100" value="65">
+              <button class="button primary" type="submit">Simulate impact</button>
+            </form>
+            <div class="scenario-result" aria-live="polite">
+              <div class="scenario-score"><span>Launch confidence</span><strong id="scenario-confidence">71%</strong><small id="scenario-delta">↓ 13 points</small></div>
+              <div class="failure-path" id="failure-path"></div>
+              <div class="early-signal"><span aria-hidden="true">◉</span><p><strong>Earliest warning signal</strong><br><span id="early-signal">API burn-up deviates by &gt;10% for two sprints.</span></p></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="dashboard-grid agents-decisions" id="decisions">
+          <article class="panel agents-panel">
+            <div class="panel-heading"><div><p class="eyebrow">MULTI-AGENT ANALYSIS</p><h3>Specialist activity</h3></div><span class="status-tag success" id="agents-status">7 complete</span></div>
+            <div id="agent-list" class="agent-list"></div>
+          </article>
+
+          <article class="panel decision-panel">
+            <div class="panel-heading"><div><p class="eyebrow">DECISION BRIEF · NS-042</p><h3>Recommended intervention</h3></div><span class="status-tag warning">Human decision</span></div>
+            <div class="recommendation"><span>RECOMMENDATION</span><h4 id="recommendation-title">Mitigate Marketplace API v2</h4><p id="recommendation-reason">Fund evidence-linked remediation, rebaseline dependencies, and retain strategic scope while a human owner accepts the tradeoff.</p></div>
+            <div class="decision-options" id="decision-options"></div>
+            <div class="decision-actions"><button class="button ghost" id="view-evidence">View evidence</button><button class="button primary" id="approve-decision">Approve option B</button></div>
+            <p class="decision-feedback" id="decision-feedback" role="status"></p>
+          </article>
+        </section>
+
+        <section class="panel audit-panel">
+          <div class="panel-heading"><div><p class="eyebrow">GOVERNANCE</p><h3>Decision & evidence trail</h3></div><button class="text-button" id="export-audit">Export audit log</button></div>
+          <div class="audit-table-wrap">
+            <table>
+              <thead><tr><th scope="col">Event</th><th scope="col">Owner</th><th scope="col">Evidence</th><th scope="col">Status</th><th scope="col">Time</th></tr></thead>
+              <tbody id="audit-body"></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+      <footer><span>Northstar Decision Lab</span><span>Explainable recommendations · Human-owned decisions · Auditable evidence</span></footer>
+    </main>
+  </div>
+  <script src="/static/app.js" defer></script>
+</body>
+</html>

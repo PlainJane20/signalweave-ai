@@ -1,0 +1,178 @@
+{
+  "id": "SCN-AURORA-2027",
+  "title": "Aurora subscription marketplace launch",
+  "organization": "Aurora Digital Cooperative (fictional)",
+  "synthetic_data": true,
+  "external_processing_allowed": false,
+  "objectives": [
+    {
+      "id": "OBJ-GROWTH",
+      "name": "Launch the trusted subscription marketplace",
+      "weight": 0.45,
+      "target_metric": "Reach 100,000 active subscriptions by year end"
+    },
+    {
+      "id": "OBJ-TRUST",
+      "name": "Increase customer trust and service resilience",
+      "weight": 0.35,
+      "target_metric": "Maintain 99.95% availability with zero material privacy events"
+    },
+    {
+      "id": "OBJ-EFFICIENCY",
+      "name": "Improve portfolio capital efficiency",
+      "weight": 0.2,
+      "target_metric": "Reduce annual platform run-rate by 15%"
+    }
+  ],
+  "teams": [
+    {
+      "id": "TEAM-PLATFORM",
+      "name": "Core Platform",
+      "available_engineers": 8,
+      "quarterly_capacity_points": 90
+    },
+    {
+      "id": "TEAM-MOBILE",
+      "name": "Mobile Experience",
+      "available_engineers": 7,
+      "quarterly_capacity_points": 85
+    },
+    {
+      "id": "TEAM-TRUST",
+      "name": "Trust and Identity",
+      "available_engineers": 5,
+      "quarterly_capacity_points": 60
+    },
+    {
+      "id": "TEAM-DATA",
+      "name": "Data Products",
+      "available_engineers": 6,
+      "quarterly_capacity_points": 70
+    }
+  ],
+  "initiatives": [
+    {
+      "id": "INIT-API-V2",
+      "name": "Marketplace API v2",
+      "owner_team_id": "TEAM-PLATFORM",
+      "objective_ids": ["OBJ-GROWTH", "OBJ-TRUST"],
+      "dependency_ids": [],
+      "required_capacity_points": 55,
+      "required_engineers": 5,
+      "annual_cost_usd": 950000,
+      "expected_annual_value_usd": 2800000,
+      "strategic_value": 92,
+      "delivery_confidence": 0.68,
+      "target_quarter": 3,
+      "alternative_vendor_cost_usd": null,
+      "systems": ["SVC-CATALOG", "SVC-IDENTITY"]
+    },
+    {
+      "id": "INIT-MOBILE-LAUNCH",
+      "name": "Mobile marketplace launch",
+      "owner_team_id": "TEAM-MOBILE",
+      "objective_ids": ["OBJ-GROWTH"],
+      "dependency_ids": ["INIT-API-V2"],
+      "required_capacity_points": 80,
+      "required_engineers": 7,
+      "annual_cost_usd": 1200000,
+      "expected_annual_value_usd": 3600000,
+      "strategic_value": 96,
+      "delivery_confidence": 0.42,
+      "target_quarter": 2,
+      "alternative_vendor_cost_usd": null,
+      "systems": ["SVC-CATALOG", "SVC-IDENTITY"]
+    },
+    {
+      "id": "INIT-IDENTITY-HA",
+      "name": "Identity multi-region resilience",
+      "owner_team_id": "TEAM-TRUST",
+      "objective_ids": ["OBJ-TRUST"],
+      "dependency_ids": [],
+      "required_capacity_points": 52,
+      "required_engineers": 4,
+      "annual_cost_usd": 620000,
+      "expected_annual_value_usd": 1300000,
+      "strategic_value": 86,
+      "delivery_confidence": 0.73,
+      "target_quarter": 2,
+      "alternative_vendor_cost_usd": null,
+      "systems": ["SVC-IDENTITY"]
+    },
+    {
+      "id": "INIT-LEGACY-REPORTS",
+      "name": "Custom legacy reporting rebuild",
+      "owner_team_id": "TEAM-PLATFORM",
+      "objective_ids": [],
+      "dependency_ids": [],
+      "required_capacity_points": 70,
+      "required_engineers": 6,
+      "annual_cost_usd": 1100000,
+      "expected_annual_value_usd": 350000,
+      "strategic_value": 28,
+      "delivery_confidence": 0.58,
+      "target_quarter": 3,
+      "alternative_vendor_cost_usd": 310000,
+      "systems": ["SVC-REPORTING"]
+    },
+    {
+      "id": "INIT-INSIGHTS",
+      "name": "Seller health insights",
+      "owner_team_id": "TEAM-DATA",
+      "objective_ids": ["OBJ-GROWTH", "OBJ-EFFICIENCY"],
+      "dependency_ids": ["INIT-API-V2"],
+      "required_capacity_points": 66,
+      "required_engineers": 5,
+      "annual_cost_usd": 730000,
+      "expected_annual_value_usd": 1450000,
+      "strategic_value": 78,
+      "delivery_confidence": 0.61,
+      "target_quarter": 4,
+      "alternative_vendor_cost_usd": 590000,
+      "systems": ["SVC-REPORTING"]
+    }
+  ],
+  "services": [
+    {
+      "id": "SVC-IDENTITY",
+      "name": "Identity Gateway",
+      "replicas": 1,
+      "recovery_time_minutes": 180,
+      "contains_phi": false,
+      "encryption_at_rest": true,
+      "audit_logging": true
+    },
+    {
+      "id": "SVC-CATALOG",
+      "name": "Subscription Catalog",
+      "replicas": 3,
+      "recovery_time_minutes": 20,
+      "contains_phi": false,
+      "encryption_at_rest": true,
+      "audit_logging": true
+    },
+    {
+      "id": "SVC-REPORTING",
+      "name": "Reporting Warehouse",
+      "replicas": 2,
+      "recovery_time_minutes": 60,
+      "contains_phi": false,
+      "encryption_at_rest": true,
+      "audit_logging": true
+    }
+  ],
+  "api_changes": [
+    {
+      "id": "API-CATALOG-V2",
+      "service_id": "SVC-CATALOG",
+      "consumer_team_ids": ["TEAM-MOBILE", "TEAM-DATA"],
+      "backward_compatible": false,
+      "compatibility_window_days": 14
+    }
+  ],
+  "constraints": [
+    "No net-new engineering headcount for two quarters",
+    "Marketplace launch commitment is currently Q2",
+    "All customer identity traffic must remain auditable"
+  ]
+}

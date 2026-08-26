@@ -1,0 +1,30 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "northstar-decision-lab"
+version = "0.1.0"
+description = "Evidence-linked, policy-gated AI decision support for complex technical portfolios"
+requires-python = ">=3.11"
+dependencies = [
+  "pydantic>=2.8,<3",
+]
+
+[project.optional-dependencies]
+openai = ["openai>=1.50,<3"]
+dev = ["pytest>=8.2,<9", "pytest-cov>=5,<7"]
+
+[project.scripts]
+northstar = "northstar.cli:main"
+northstar-web = "northstar.server:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/northstar"]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["tests"]
+
+[tool.coverage.run]
+source = ["northstar"]

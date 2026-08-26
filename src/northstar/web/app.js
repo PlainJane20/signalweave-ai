@@ -3,7 +3,7 @@
 
   const demoData = {
     generated_at: "2026-08-26T09:42:00-07:00",
-    summary: "Northstar analyzed 5 initiatives across 4 teams. The portfolio is modeled at 105.9% capacity, with 7 high or critical findings requiring accountable human review.",
+    summary: "SignalWeave analyzed 5 initiatives across 4 teams. The portfolio is modeled at 105.9% capacity, with 7 high or critical findings requiring accountable human review.",
     confidence: 84,
     kpis: { alignment: "80%", critical_risks: 7, value_at_risk: "$487K", capacity: "105.9%" },
     risks: [
@@ -53,7 +53,7 @@
       { event: "Decision brief synthesized", owner: "Decision Arbiter", evidence: "12 linked artifacts", status: "Ready", time: "09:42" },
       { event: "Privacy control escalated", owner: "Governance Agent", evidence: "POL-07", status: "Review", time: "09:41" },
       { event: "Critical path recalculated", owner: "Execution Agent", evidence: "2 initiative dependencies", status: "Complete", time: "09:40" },
-      { event: "Portfolio data validated", owner: "Northstar", evidence: "5 source systems", status: "Complete", time: "09:39" }
+      { event: "Portfolio data validated", owner: "SignalWeave", evidence: "5 source systems", status: "Complete", time: "09:39" }
     ]
   };
 

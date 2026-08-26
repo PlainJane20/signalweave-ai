@@ -3,9 +3,9 @@ requires = ["hatchling>=1.25"]
 build-backend = "hatchling.build"
 
 [project]
-name = "northstar-decision-lab"
+name = "signalweave-ai"
 version = "0.1.0"
-description = "Evidence-linked, policy-gated AI decision support for complex technical portfolios"
+description = "SignalWeave AI: evidence-linked, policy-gated program intelligence powered by the Northstar Decision Engine"
 requires-python = ">=3.11"
 dependencies = [
   "pydantic>=2.8,<3",

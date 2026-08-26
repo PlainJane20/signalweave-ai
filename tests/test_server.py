@@ -36,7 +36,7 @@ def test_dashboard_and_assets_are_served(server_url) -> None:
     with urlopen(f"{server_url}/static/app.js", timeout=2) as response:
         javascript = response.read().decode("utf-8")
 
-    assert "Northstar Decision Lab" in html
+    assert "SignalWeave AI" in html
     assert "--" in css
     assert "loadReport" in javascript
 

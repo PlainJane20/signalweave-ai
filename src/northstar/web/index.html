@@ -3,22 +3,24 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Northstar Decision Lab — evidence-led portfolio intelligence for complex programs.">
-  <title>Northstar Decision Lab</title>
+  <meta name="description" content="SignalWeave AI — weaving strategy, architecture, risk, capacity, and economics into evidence-backed decisions.">
+  <title>SignalWeave AI | Technical Program Intelligence</title>
   <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to dashboard</a>
   <div class="app-shell">
     <aside class="sidebar" aria-label="Primary navigation">
-      <a class="brand" href="#overview" aria-label="Northstar home">
+      <a class="brand" href="#overview" aria-label="SignalWeave AI home">
         <span class="brand-mark" aria-hidden="true">
           <svg viewBox="0 0 40 40" role="img"><path d="M20 2l4.2 13.8L38 20l-13.8 4.2L20 38l-4.2-13.8L2 20l13.8-4.2L20 2z"/><circle cx="20" cy="20" r="4"/></svg>
         </span>
-        <span><strong>Northstar</strong><small>Decision Lab</small></span>
+        <span><strong>SignalWeave</strong><small>AI Decision Lab</small></span>
       </a>
       <nav>
         <a class="nav-link active" href="#overview"><span aria-hidden="true">⌂</span> Overview</a>
+        <a class="nav-link" href="#story"><span aria-hidden="true">◉</span> What · Why · How</a>
+        <a class="nav-link" href="#architecture"><span aria-hidden="true">⌘</span> Architecture</a>
         <a class="nav-link" href="#portfolio"><span aria-hidden="true">◇</span> Portfolio</a>
         <a class="nav-link" href="#risk"><span aria-hidden="true">△</span> Risk intelligence</a>
         <a class="nav-link" href="#scenarios"><span aria-hidden="true">◫</span> Scenario lab</a>
@@ -49,9 +51,10 @@
       <div class="content" id="overview">
         <section class="hero panel" aria-labelledby="hero-title">
           <div>
-            <p class="eyebrow accent">PROGRAM HEALTH · Q3 PLANNING</p>
-            <h2 id="hero-title">Decisions that keep strategy and execution aligned.</h2>
-            <p id="hero-summary">Northstar has analyzed the portfolio, mapped critical dependencies, and identified the highest-leverage intervention.</p>
+            <p class="eyebrow accent">SIGNALWEAVE AI · NORTHSTAR DECISION ENGINE</p>
+            <h2 id="hero-title">Weave fragmented program signals into confident decisions.</h2>
+            <p class="hero-tagline">Strategy. Architecture. Risk. Capacity. Economics. One evidence-backed control plane.</p>
+            <p id="hero-summary">SignalWeave maps cross-team dependencies, challenges portfolio assumptions, and surfaces the highest-leverage intervention before delivery risk becomes an incident.</p>
             <div class="hero-actions">
               <a class="button primary" href="#decisions">Review recommendation <span aria-hidden="true">→</span></a>
               <button class="button ghost" id="run-analysis">Run fresh analysis</button>
@@ -66,11 +69,37 @@
           </div>
         </section>
 
+        <section class="story-grid" id="story" aria-label="What, why, and how SignalWeave works">
+          <article class="story-card"><span class="story-number">01</span><p class="eyebrow">WHAT</p><h3>Program intelligence, not another status dashboard.</h3><p>A typed multi-agent system converts roadmaps, RFCs, capacity, economics, and control metadata into comparable decision options.</p></article>
+          <article class="story-card"><span class="story-number">02</span><p class="eyebrow">WHY</p><h3>Complex programs fail at organizational seams.</h3><p>Hidden dependencies, competing assumptions, late policy reviews, and overloaded teams become visible while leaders can still intervene.</p></article>
+          <article class="story-card"><span class="story-number">03</span><p class="eyebrow">HOW</p><h3>Specialists analyze. Policy gates govern. Humans decide.</h3><p>Six narrow agents produce evidence-linked findings; deterministic code validates, gates, and synthesizes them without automating accountability.</p></article>
+        </section>
+
         <section class="kpi-grid" aria-label="Executive metrics">
           <article class="kpi-card"><div class="kpi-icon blue">↗</div><div><span>Strategic alignment</span><strong id="kpi-alignment">—</strong><small id="kpi-alignment-note">Across active initiatives</small></div></article>
           <article class="kpi-card"><div class="kpi-icon amber">!</div><div><span>Critical risks</span><strong id="kpi-risks">—</strong><small id="kpi-risks-note">Require executive action</small></div></article>
           <article class="kpi-card"><div class="kpi-icon mint">$</div><div><span>Modeled cost delta</span><strong id="kpi-value">—</strong><small id="kpi-value-note">Illustrative recommendation mix</small></div></article>
           <article class="kpi-card"><div class="kpi-icon violet">◎</div><div><span>Capacity pressure</span><strong id="kpi-capacity">—</strong><small id="kpi-capacity-note">Platform team utilization</small></div></article>
+        </section>
+
+        <section class="panel architecture-panel" id="architecture">
+          <div class="panel-heading"><div><p class="eyebrow">SYSTEM ARCHITECTURE</p><h3>From fragmented inputs to accountable action</h3><p>Provider-independent domain logic keeps AI assistance separate from policy and approval authority.</p></div><span class="status-tag success">Human governed</span></div>
+          <div class="architecture-flow" role="img" aria-label="SignalWeave processing flow from program inputs through validation, agents, policy gate, arbiter, and human decision">
+            <div class="flow-stage input"><span>01</span><strong>Program inputs</strong><small>Strategy · RFCs · Roadmaps · Capacity</small></div>
+            <i aria-hidden="true">→</i>
+            <div class="flow-stage"><span>02</span><strong>Typed boundary</strong><small>Pydantic validation · Reference integrity</small></div>
+            <i aria-hidden="true">→</i>
+            <div class="flow-stage agents"><span>03</span><strong>Specialist fan-out</strong><small>6 isolated agents · Offline or OpenAI</small></div>
+            <i aria-hidden="true">→</i>
+            <div class="flow-stage gate"><span>04</span><strong>Policy gate</strong><small>Allow · Human review · Block</small></div>
+            <i aria-hidden="true">→</i>
+            <div class="flow-stage output"><span>05</span><strong>Human decision</strong><small>Options · Evidence · Audit trail</small></div>
+          </div>
+          <div class="architecture-principles">
+            <div><strong>Evidence before prose</strong><span>Every finding cites scenario entities and measurable signals.</span></div>
+            <div><strong>Deterministic control plane</strong><span>Models cannot override validation, privacy rules, or approval gates.</span></div>
+            <div><strong>Safe degradation</strong><span>The complete analysis remains available offline without credentials.</span></div>
+          </div>
         </section>
 
         <section class="dashboard-grid" id="risk">
@@ -143,6 +172,29 @@
           </article>
         </section>
 
+        <section class="panel walkthrough-panel" id="walkthrough">
+          <div class="panel-heading"><div><p class="eyebrow">TRACEABLE AGENT EXAMPLE</p><h3>How one subagent turns a weak signal into a governed decision</h3><p>This example is generated from the checked-in synthetic portfolio—no company or customer data.</p></div><span class="status-tag">Reproducible</span></div>
+          <div class="walkthrough-flow" aria-label="Architecture agent walkthrough">
+            <article><span class="walkthrough-step">INPUT</span><h4>Architecture metadata</h4><pre><code>{
+  "service": "Identity Gateway",
+  "replicas": 1,
+  "recovery_time_minutes": 240
+}</code></pre></article>
+            <i aria-hidden="true">→</i>
+            <article><span class="walkthrough-step">SPECIALIST</span><h4>Architecture Agent</h4><p>Applies bounded SPOF and API compatibility rules, then returns only a validated <code>AgentAssessment</code>.</p><div class="agent-rule">replicas &lt; 2 → HIGH resilience finding</div></article>
+            <i aria-hidden="true">→</i>
+            <article><span class="walkthrough-step">FINDING</span><h4>Evidence-linked result</h4><pre><code>{
+  "severity": "high",
+  "category": "single_point_of_failure",
+  "confidence": 0.98,
+  "human_decision": true
+}</code></pre></article>
+            <i aria-hidden="true">→</i>
+            <article><span class="walkthrough-step">GATE</span><h4>Human review</h4><p>The policy engine escalates the finding. The arbiter compares continuing, mitigating, redirecting, or stopping—but cannot approve.</p><div class="agent-rule success">Decision authority remains human</div></article>
+          </div>
+          <div class="walkthrough-outcome"><strong>Portfolio result</strong><span>6 assessments</span><span>9 findings</span><span>7 high/critical</span><span>13 options</span><span>105.9% capacity</span><span>$487K modeled delta</span></div>
+        </section>
+
         <section class="panel audit-panel">
           <div class="panel-heading"><div><p class="eyebrow">GOVERNANCE</p><h3>Decision & evidence trail</h3></div><button class="text-button" id="export-audit">Export audit log</button></div>
           <div class="audit-table-wrap">
@@ -153,7 +205,7 @@
           </div>
         </section>
       </div>
-      <footer><span>Northstar Decision Lab</span><span>Explainable recommendations · Human-owned decisions · Auditable evidence</span></footer>
+      <footer><span>SignalWeave AI · Powered by the Northstar Decision Engine</span><span>Explainable recommendations · Human-owned decisions · Auditable evidence</span></footer>
     </main>
   </div>
   <script src="/static/app.js" defer></script>

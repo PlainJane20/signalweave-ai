@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320" role="img" aria-labelledby="title description">
+  <title id="title">SignalWeave AI</title>
+  <desc id="description">Weaving strategy, architecture, risk, capacity, and economics into evidence-backed decisions.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#091c2d"/>
+      <stop offset="0.58" stop-color="#123b54"/>
+      <stop offset="1" stop-color="#176678"/>
+    </linearGradient>
+    <radialGradient id="glow">
+      <stop offset="0" stop-color="#63d1dc" stop-opacity=".28"/>
+      <stop offset="1" stop-color="#63d1dc" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#05131f" flood-opacity=".35"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="320" rx="24" fill="url(#bg)"/>
+  <circle cx="1035" cy="55" r="220" fill="url(#glow)"/>
+  <g opacity=".13" fill="none" stroke="#a8e7ed">
+    <path d="M750 40C880 140 940 40 1140 155"/>
+    <path d="M710 260C850 145 1010 280 1180 105"/>
+    <path d="M840 25C920 180 1070 135 1170 255"/>
+  </g>
+  <g transform="translate(74 68)" filter="url(#shadow)">
+    <rect width="88" height="88" rx="22" fill="#12364d" stroke="#65ced8" stroke-opacity=".5"/>
+    <path d="M44 13l7.2 23.8L75 44l-23.8 7.2L44 75l-7.2-23.8L13 44l23.8-7.2L44 13z" fill="none" stroke="#68d3dd" stroke-width="3"/>
+    <circle cx="44" cy="44" r="7" fill="#68d3dd"/>
+  </g>
+  <text x="190" y="112" fill="#ffffff" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="54" font-weight="750" letter-spacing="-1">SignalWeave AI</text>
+  <text x="192" y="153" fill="#76d7df" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="15" font-weight="700" letter-spacing="2.8">TECHNICAL PROGRAM INTELLIGENCE</text>
+  <text x="75" y="225" fill="#d6e7ed" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="22">Weaving strategy, architecture, risk, capacity, and economics</text>
+  <text x="75" y="258" fill="#d6e7ed" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="22">into evidence-backed decisions.</text>
+  <g transform="translate(780 168)" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="12" font-weight="700">
+    <g transform="translate(0 0)"><rect width="88" height="42" rx="21" fill="#ffffff" fill-opacity=".1" stroke="#ffffff" stroke-opacity=".18"/><text x="44" y="26" text-anchor="middle" fill="#d9edf1">6 agents</text></g>
+    <g transform="translate(98 0)"><rect width="96" height="42" rx="21" fill="#ffffff" fill-opacity=".1" stroke="#ffffff" stroke-opacity=".18"/><text x="48" y="26" text-anchor="middle" fill="#d9edf1">typed data</text></g>
+    <g transform="translate(204 0)"><rect width="112" height="42" rx="21" fill="#ffffff" fill-opacity=".1" stroke="#ffffff" stroke-opacity=".18"/><text x="56" y="26" text-anchor="middle" fill="#d9edf1">human gated</text></g>
+  </g>
+</svg>

@@ -57,6 +57,17 @@ Large programs rarely fail because one team cannot execute a ticket. They fail a
 
 The project demonstrates a Staff-level operating principle: AI can widen the field of analysis, but it should not hide evidence, collapse uncertainty, or automate executive accountability.
 
+> **Related work in this portfolio:** [Tarmac](https://github.com/PlainJane20/tarmac)
+> and [tpm-agent-os](https://github.com/PlainJane20/tpm-agent-os) also model
+> TPM/portfolio decision-governance territory — worth being upfront about
+> rather than presenting each as unrelated. Same underlying interest,
+> three different shapes: Tarmac is a web-app governance layer connecting
+> Jira/GitHub/ServiceNow-style tools; tpm-agent-os is a lean six-agent
+> pipeline modeling the Staff TPM operating model directly; this one is
+> the most structurally elaborate of the three — a policy-gated decision
+> control plane with a dashboard, aimed specifically at the *seams
+> between* teams rather than any one team's status.
+
 ## What it does
 
 - Creates a typed, auditable program model from synthetic initiatives, teams, objectives, milestones, dependencies, risks, and capacity.

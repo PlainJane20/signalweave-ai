@@ -59,8 +59,7 @@ The project demonstrates a Staff-level operating principle: AI can widen the fie
 
 > **Related work in this portfolio:** [Tarmac](https://github.com/PlainJane20/tarmac)
 > and [tpm-agent-os](https://github.com/PlainJane20/tpm-agent-os) also model
-> TPM/portfolio decision-governance territory — worth being upfront about
-> rather than presenting each as unrelated. Same underlying interest,
+> TPM/portfolio decision-governance territory. Same underlying interest,
 > three different shapes: Tarmac is a web-app governance layer connecting
 > Jira/GitHub/ServiceNow-style tools; tpm-agent-os is a lean six-agent
 > pipeline modeling the Staff TPM operating model directly; this one is

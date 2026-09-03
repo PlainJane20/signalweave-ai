@@ -57,6 +57,19 @@ Large programs rarely fail because one team cannot execute a ticket. They fail a
 
 The project demonstrates a Staff-level operating principle: AI can widen the field of analysis, but it should not hide evidence, collapse uncertainty, or automate executive accountability.
 
+> **Why I built it:** this is a personal project, built to get real practice designing a
+> multi-domain decision pipeline where six narrow specialist analyzers — strategy,
+> architecture, dependencies, governance, economics, pre-mortem — each have to cite
+> evidence for every finding, and ordinary deterministic code, not the model, decides
+> whether that finding auto-passes, forces human review, or blocks outright. That's the
+> actual Staff/Principal TPM skill this practices: turning strategy alignment, architecture
+> risk, delivery dependencies, capacity pressure, and cost/value tradeoffs into one
+> comparable set of continue/mitigate/redirect/buy/stop options without letting a single
+> opaque score quietly make the call for you. Writing the arbiter and policy gates as
+> testable code instead of another prompt was practice at the harder part of "AI-assisted
+> program decisions" — making the evidence requirement and the escalation-to-human path
+> structurally impossible to skip, not just a best practice someone remembers to follow.
+
 > **Related work in this portfolio:** [Tarmac](https://github.com/PlainJane20/tarmac)
 > and [tpm-agent-os](https://github.com/PlainJane20/tpm-agent-os) also model
 > TPM/portfolio decision-governance territory. Same underlying interest,

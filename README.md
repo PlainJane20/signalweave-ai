@@ -32,6 +32,15 @@ SignalWeave turns strategy, roadmaps, architecture constraints, staffing assumpt
 | **How does it work?** | Typed inputs fan out to six narrow agents. Their evidence-linked findings pass through deterministic policy gates before an arbiter creates human-owned decision options. |
 | **Who benefits?** | Staff TPMs, engineering and product leaders, portfolio owners, security/privacy partners, and executive sponsors. |
 | **What makes it different?** | AI expands the analysis, but cannot bypass validation, policy, or accountable human approval. It also runs completely offline. |
+| **Pattern** | Orchestrator-Worker with a deterministic governance gate (see [Architecture pattern](#architecture-pattern)). |
+
+## Architecture pattern
+
+**Orchestrator-Worker, with a deterministic governance gate.** `DecisionOrchestrator` (`src/northstar/orchestrator.py`) runs a fixed list of six specialist agents (`src/northstar/agents/`) over one scenario, merges their findings, applies `policy.evaluate_gate`, and synthesises options in `arbiter.py`. The orchestrator is plain Python: the agent list and order are hard-coded, and the specialists run one after another, not as an LLM-planned or concurrent fan-out.
+
+- **Deterministic vs model-driven:** Each specialist computes rule-based findings first (`SpecialistAgent.findings`). In the default `offline` mode those are the output and no model is called. With `NORTHSTAR_PROVIDER=openai`, the provider (`providers.py`) sends the scenario plus that baseline to an OpenAI model, and the model's structured assessment replaces the rule-based one. The gate, option scoring, metrics and report ID are always deterministic code, and any provider error falls back to the rules.
+- **Human gate:** The policy gate returns `block`, `human_review` or `allow`. The system never acts on its own; a human decides on the surfaced options. There is no approval workflow in code, only the gate status; the dashboard's "Approve" button (`web/app.js`) just updates on-page text and records nothing.
+- **Honest limit:** The specialists do not call each other, negotiate or iterate. This is a single pass, not an autonomous loop or a swarm, and in the default mode the "agents" are rule sets rather than models.
 
 ## Competencies demonstrated
 

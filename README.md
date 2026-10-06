@@ -29,7 +29,7 @@ SignalWeave turns strategy, roadmaps, architecture constraints, staffing assumpt
 |---|---|
 | **What is it?** | A program decision control plane that finds cross-team, architectural, governance, capacity, and investment risk before it becomes delivery failure. |
 | **Why build it?** | Traditional dashboards report status by team; complex programs fail in the seams between those teams. SignalWeave analyzes the seams. |
-| **How does it work?** | Typed inputs fan out to six narrow agents. Their evidence-linked findings pass through deterministic policy gates before an arbiter creates human-owned decision options. |
+| **How does it work?** | Typed inputs go through six narrow specialists, run one after another. Their evidence-linked findings pass through deterministic policy gates before an arbiter creates human-owned decision options. |
 | **Who benefits?** | Staff TPMs, engineering and product leaders, portfolio owners, security/privacy partners, and executive sponsors. |
 | **What makes it different?** | AI expands the analysis, but cannot bypass validation, policy, or accountable human approval. It also runs completely offline. |
 | **Pattern** | Orchestrator-Worker with a deterministic governance gate (see [Architecture pattern](#architecture-pattern)). |
@@ -39,7 +39,7 @@ SignalWeave turns strategy, roadmaps, architecture constraints, staffing assumpt
 **Orchestrator-Worker, with a deterministic governance gate.** `DecisionOrchestrator` (`src/northstar/orchestrator.py`) runs a fixed list of six specialist agents (`src/northstar/agents/`) over one scenario, merges their findings, applies `policy.evaluate_gate`, and synthesises options in `arbiter.py`. The orchestrator is plain Python: the agent list and order are hard-coded, and the specialists run one after another, not as an LLM-planned or concurrent fan-out.
 
 - **Deterministic vs model-driven:** Each specialist computes rule-based findings first (`SpecialistAgent.findings`). In the default `offline` mode those are the output and no model is called. With `NORTHSTAR_PROVIDER=openai`, the provider (`providers.py`) sends the scenario plus that baseline to an OpenAI model, and the model's structured assessment replaces the rule-based one. The gate, option scoring, metrics and report ID are always deterministic code, and any provider error falls back to the rules.
-- **Human gate:** The policy gate returns `block`, `human_review` or `allow`. The system never acts on its own; a human decides on the surfaced options. There is no approval workflow in code, only the gate status; the dashboard's "Approve" button (`web/app.js`) just updates on-page text and records nothing.
+- **Human gate:** The policy gate returns `block`, `human_review` or `allow`. The system never acts on its own; a human decides on the surfaced options. There is no approval workflow in code, only the gate status; the dashboard's "Demo: approve option" button (`web/app.js`) just updates on-page text, is labelled as a demonstration, and records nothing.
 - **Honest limit:** The specialists do not call each other, negotiate or iterate. This is a single pass, not an autonomous loop or a swarm, and in the default mode the "agents" are rule sets rather than models.
 
 ## Competencies demonstrated
@@ -95,8 +95,8 @@ The project demonstrates a Staff-level operating principle: AI can widen the fie
 - Runs specialist analysis for strategy alignment, architecture risk, delivery dependencies, governance, portfolio economics, and pre-mortem failure paths.
 - Reconciles agent findings through deterministic policy gates instead of trusting an unconstrained summary.
 - Simulates shocks such as an engineering capacity loss or a critical dependency delay.
-- Produces multiple decision options with confidence, evidence, owners, and required human approvals.
-- Presents the result in an executive-ready dashboard with KPI cards, charts, a dependency graph, scenario comparison, and decision log.
+- Produces multiple decision options with confidence, evidence, owners, and the human approvals they would require (approval itself happens outside the tool).
+- Presents the result in an executive-ready dashboard with KPI cards, charts, a dependency graph, scenario comparison, and a sample decision trail.
 - Runs fully offline with deterministic synthetic data; optional provider adapters can be tested without exposing API keys.
 
 ## Who it helps
@@ -136,10 +136,12 @@ flowchart LR
     H --> B
     B --> C[Options and tradeoffs]
     C --> UI[Web dashboard / API / CLI]
-    C --> L[(Decision log)]
+    C --> L[(Sample decision trail)]
 ```
 
 The Northstar engine's domain and policy layers are provider-independent. The offline demo uses deterministic analyzers so a reviewer can reproduce every result without network access or API credentials. Any optional LLM integration lives behind an adapter and must return the same validated contracts.
+
+Optional OpenTelemetry tracing of the orchestrator, specialists and provider calls is described in [docs/TRACING.md](docs/TRACING.md); it is a no-op unless configured.
 
 See [Architecture](docs/ARCHITECTURE.md) and [ADR-001: Human-governed agent orchestration](docs/adr/001-human-governed-orchestration.md) for the deeper design rationale.
 
@@ -191,7 +193,7 @@ Architecture Agent output:
 }
 ```
 
-The model or deterministic analyzer does **not** approve a remediation. The policy gate escalates it, the arbiter creates comparable options, and a human owner records the decision. See the [complete agent walkthrough](docs/AGENT_WALKTHROUGH.md).
+The model or deterministic analyzer does **not** approve a remediation. The policy gate escalates it, the arbiter creates comparable options, and a human owner decides outside the tool. See the [complete agent walkthrough](docs/AGENT_WALKTHROUGH.md).
 
 ## Engineering decisions and lessons
 
@@ -323,7 +325,7 @@ The dependency-free interface in `src/northstar/web/` is designed for an executi
 - **Capacity chart** compares demand with available team capacity.
 - **Scenario comparison** shows baseline and counterfactual outcomes side by side.
 - **Decision options** expose tradeoffs, confidence, evidence, and approval requirements.
-- **Audit log** records what a person selected and why.
+- **Audit log** is a sample trail of pipeline events; the dashboard does not record anyone's selection.
 
 ## Security and responsible AI
 

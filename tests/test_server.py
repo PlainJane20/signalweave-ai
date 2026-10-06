@@ -39,6 +39,10 @@ def test_dashboard_and_assets_are_served(server_url) -> None:
     assert "SignalWeave AI" in html
     assert "--" in css
     assert "loadReport" in javascript
+    # The Approve button is a demonstration; the UI must not claim it recorded anything.
+    assert "recorded in the audit trail" not in javascript
+    assert "was not recorded anywhere" in javascript
+    assert "Demo: approve option" in html
 
 
 def test_health_endpoint_reports_offline_default(server_url, monkeypatch) -> None:

@@ -203,7 +203,7 @@
   function selectDecision() {
     document.querySelectorAll(".option-card").forEach((card) => card.classList.toggle("selected", card.querySelector("input").checked));
     const selected = document.querySelector('input[name="decision-option"]:checked');
-    if (selected) $("#approve-decision").textContent = `Approve option ${selected.value}`;
+    if (selected) $("#approve-decision").textContent = `Demo: approve option ${selected.value}`;
   }
 
   function renderAudit(audit) {
@@ -230,7 +230,7 @@
   $("#severity-range").addEventListener("input", (event) => { $("#severity-output").textContent = `${event.target.value}%`; });
   $("#refresh-button").addEventListener("click", loadReport);
   $("#run-analysis").addEventListener("click", () => { $("#run-analysis").textContent = "Analyzing…"; setTimeout(() => { loadReport(); $("#run-analysis").textContent = "Analysis complete ✓"; setTimeout(() => { $("#run-analysis").textContent = "Run fresh analysis"; }, 1800); }, 700); });
-  $("#approve-decision").addEventListener("click", () => { const selected = document.querySelector('input[name="decision-option"]:checked'); $("#decision-feedback").textContent = `Option ${selected ? selected.value : "B"} recorded in the audit trail. Human ownership retained.`; });
+  $("#approve-decision").addEventListener("click", () => { const selected = document.querySelector('input[name="decision-option"]:checked'); $("#decision-feedback").textContent = `Demo only: option ${selected ? selected.value : "B"} was not recorded anywhere. SignalWeave has no approval workflow; a human owner decides outside this tool.`; });
   $("#view-evidence").addEventListener("click", () => { $("#audit-body").closest(".audit-panel").scrollIntoView({ behavior: "smooth" }); });
   $("#export-audit").addEventListener("click", () => { const blob = new Blob([JSON.stringify(state.audit, null, 2)], { type: "application/json" }); const link = document.createElement("a"); link.href = URL.createObjectURL(blob); link.download = "northstar-audit-log.json"; link.click(); URL.revokeObjectURL(link.href); });
   $("#menu-toggle").addEventListener("click", () => { const sidebar = $(".sidebar"); sidebar.classList.toggle("open"); $("#menu-toggle").setAttribute("aria-expanded", String(sidebar.classList.contains("open"))); });

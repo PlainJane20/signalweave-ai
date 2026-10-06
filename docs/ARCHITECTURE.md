@@ -43,7 +43,7 @@ sequenceDiagram
 |---|---|---|
 | Contracts | Data shape, enums, numeric bounds | Business decisions |
 | Agents | Narrow analysis and cited findings | Cross-program policy |
-| Orchestration | Ordering, fan-out, aggregation | Provider-specific parsing |
+| Orchestration | Ordering, sequential specialist runs, aggregation | Provider-specific parsing |
 | Policy gates | Escalation/block conditions | Free-form recommendations |
 | Arbiter | Comparable decision options | Silent approval |
 | API/UI | Transport and explanation | Domain logic |

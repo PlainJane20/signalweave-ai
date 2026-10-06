@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import hashlib
+import time
 
 from northstar.agents import (
     ArchitectureAgent,
@@ -12,6 +13,7 @@ from northstar.agents import (
     PremortemAgent,
     StrategyAgent,
 )
+from northstar import tracing
 from northstar.arbiter import build_metrics, build_options
 from northstar.contracts import (
     AgentAssessment,
@@ -44,19 +46,62 @@ class DecisionOrchestrator:
         self.provider = provider or build_provider()
         self.policy = policy or PolicyConfig()
 
+    def _model_name(self) -> str:
+        # Offline mode has no model; hosted providers expose their configured model id.
+        return str(getattr(self.provider, "_model", "none"))
+
     def _run_agent(self, agent_type: type, scenario: ProgramScenario) -> AgentAssessment:
-        try:
-            return agent_type(self.provider).run(scenario)
-        except ProviderError as exc:
-            fallback = agent_type(OfflineProvider()).run(scenario)
-            return fallback.model_copy(update={
-                "summary": f"{fallback.summary} Hosted analysis unavailable; deterministic fallback used ({exc})."
-            })
+        mode = self.provider.mode
+        started = time.perf_counter()
+        with tracing.span(
+            "agent",
+            **{
+                "agent.name": agent_type.name,
+                "model.name": self._model_name(),
+                "provider.mode": mode,
+                "analysis.mock": mode == "offline",
+            },
+        ) as s:
+            try:
+                result = agent_type(self.provider).run(scenario)
+                tracing.set_attrs(
+                    s,
+                    **{"agent.success": True, "agent.fallback": False,
+                       "findings.count": len(result.findings)},
+                )
+                return result
+            except ProviderError as exc:
+                tracing.set_attrs(s, **{"agent.success": False, "agent.fallback": True})
+                with tracing.span(
+                    "fallback", **{"agent.name": agent_type.name, "fallback.reason": type(exc).__name__}
+                ) as fb_span:
+                    tracing.record_error(fb_span, exc)
+                    fallback = agent_type(OfflineProvider()).run(scenario)
+                tracing.set_attrs(s, **{"findings.count": len(fallback.findings)})
+                return fallback.model_copy(update={
+                    "summary": f"{fallback.summary} Hosted analysis unavailable; deterministic fallback used ({exc})."
+                })
+            except BaseException:
+                tracing.set_attrs(s, **{"agent.success": False})
+                raise
+            finally:
+                tracing.set_attrs(s, **{"duration_ms": round((time.perf_counter() - started) * 1000, 3)})
 
     def run(self, scenario: ProgramScenario) -> DecisionReport:
+        with tracing.span("run", **{"provider.mode": self.provider.mode}) as s:
+            report = self._run(scenario, s)
+            tracing.set_attrs(
+                s,
+                **{"gate.verdict": report.gate.status.value, "options.count": len(report.options),
+                   "recommended.count": len(report.recommended_option_ids)},
+            )
+            return report
+
+    def _run(self, scenario: ProgramScenario, run_span) -> DecisionReport:
         validated = ProgramScenario.model_validate(scenario)
         assessments = [self._run_agent(agent_type, validated) for agent_type in self.agent_types]
         findings = [finding for assessment in assessments for finding in assessment.findings]
+        tracing.set_attrs(run_span, **{"agents.count": len(assessments), "findings.count": len(findings)})
         gate = evaluate_gate(findings, self.policy)
         options = build_options(validated, findings)
         metrics = build_metrics(validated, findings, options)

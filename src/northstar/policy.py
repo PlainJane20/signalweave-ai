@@ -1,5 +1,6 @@
 """Deterministic policy gates applied before recommendations are surfaced."""
 
+from northstar import tracing
 from northstar.contracts import (
     Finding,
     FindingCategory,
@@ -10,6 +11,21 @@ from northstar.contracts import (
 
 
 def evaluate_gate(findings: list[Finding], policy: PolicyConfig) -> GateDecision:
+    with tracing.span("policy.gate", **{"findings.count": len(findings)}) as s:
+        decision = _evaluate_gate(findings, policy)
+        tracing.set_attrs(
+            s,
+            **{
+                "gate.verdict": decision.status.value,
+                "gate.reason": "; ".join(decision.reasons),
+                "gate.blocking.count": len(decision.blocking_finding_ids),
+                "gate.review.count": len(decision.review_finding_ids),
+            },
+        )
+        return decision
+
+
+def _evaluate_gate(findings: list[Finding], policy: PolicyConfig) -> GateDecision:
     blocking: list[str] = []
     review: list[str] = []
     reasons: list[str] = []

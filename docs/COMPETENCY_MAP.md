@@ -76,7 +76,7 @@ This document maps demonstrated competencies to inspectable evidence. It intenti
 
 **Evidence:**
 
-- Forty tests cover contracts, specialists, policy, orchestration, provider mocking, CLI, and HTTP behavior.
+- 48 tests cover contracts, specialists, policy, orchestration, provider mocking, CLI, HTTP behavior, and tracing (the 8 tracing tests need the optional `opentelemetry-sdk`; without it they skip and 40 run).
 - GitHub Actions runs Python 3.11 and 3.12 matrices.
 - Unexpected fields, invalid references, malformed hosted output, provider failures, and invalid HTTP requests have explicit tests.
 - The frontend has no CDN or runtime framework dependency and includes an offline fallback.

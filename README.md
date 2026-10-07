@@ -12,7 +12,7 @@
 [![Agents](https://img.shields.io/badge/Specialist_Agents-6-6658d3?style=for-the-badge)](#architecture)
 [![Human Governed](https://img.shields.io/badge/Policy-Human_Governed-179b78?style=for-the-badge)](docs/adr/001-human-governed-orchestration.md)
 [![Offline First](https://img.shields.io/badge/Mode-Offline_First-27a9c3?style=for-the-badge)](#quick-start)
-[![Tests](https://img.shields.io/badge/Tests-40-1565d8?style=for-the-badge)](#testing)
+[![Tests](https://img.shields.io/badge/Tests-48-1565d8?style=for-the-badge)](#testing)
 [![MIT License](https://img.shields.io/badge/License-MIT-6b7280?style=for-the-badge)](LICENSE)
 
 </div>
@@ -55,7 +55,7 @@ SignalWeave is organized around observable engineering and program-leadership co
 | **Portfolio and investment judgment** | Cost/value comparison, capacity pressure, build-versus-buy signals, and continue/mitigate/stop options | Economics Agent, arbiter, dashboard charts |
 | **Applied AI systems engineering** | Provider isolation, structured outputs, deterministic fallback, retry/timeout configuration, and safe degradation | `providers.py`, Pydantic contracts, mocked-provider tests |
 | **Data-driven decision support** | Reproducible synthetic metrics, risk heatmap, investment chart, dependency graph, and scenario simulation | Example dataset and HTML/CSS/JavaScript dashboard |
-| **Quality and delivery discipline** | Forty automated tests, Python 3.11/3.12 CI, strict validation, API failure handling, and offline verification | `tests/`, GitHub Actions workflow |
+| **Quality and delivery discipline** | 48 automated tests, Python 3.11/3.12 CI, strict validation, API failure handling, and offline verification | `tests/`, GitHub Actions workflow |
 | **Executive communication** | Evidence-linked findings, concise decision briefs, comparable options, and an auditable disposition trail | Decision report contract and dashboard |
 
 See the [detailed competency map](docs/COMPETENCY_MAP.md) for the design choices and verification evidence behind each area.
@@ -237,7 +237,7 @@ The checked-in scenario currently produces these deterministic values:
 │   ├── cli.py            # Command-line entry point
 │   └── server.py         # Local dashboard and JSON API
 ├── examples/             # Reproducible synthetic portfolio
-├── tests/                # Unit, policy, provider, and end-to-end tests
+├── tests/                # 48 tests: unit, policy, provider, tracing, and end-to-end
 ├── .github/workflows/    # Python 3.11/3.12 continuous integration
 └── docs/                 # Architecture, methodology, and decision records
 ```
@@ -360,7 +360,7 @@ No test requires a real provider credential or network connection.
 
 GitHub Actions runs the complete suite on Python 3.11 and 3.12 for every push and pull request.
 
-The repository contains **40 tests**. Socket-based HTTP tests skip automatically only when a restricted execution environment prevents binding localhost; they run normally on a developer machine. The supported runtime is Python 3.11 or newer.
+The repository contains **48 tests** (`pip install -e '.[dev]'` includes `opentelemetry-sdk`, which the 8 tracing tests in `tests/test_tracing.py` need). Without `opentelemetry-sdk` that file is skipped as a whole and the suite reports 40 passed, 1 skipped. Socket-based HTTP tests skip automatically only when a restricted execution environment prevents binding localhost; they run normally on a developer machine. The supported runtime is Python 3.11 or newer.
 
 ## Design limitations and next steps
 
